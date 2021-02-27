@@ -36,8 +36,12 @@
     margin: 0 0.5rem;
 }
 
-.countdownButton {
+.buttonContainer {
+    display: flex;
     width: 100%;
+}
+.countdownButton {
+    width: 75%;
     height: 5rem;
     margin-top: 2rem;
     display: flex;
@@ -52,6 +56,44 @@
     transition: background-color 0.2s;
 }
 
-.countdownButton:hover{
+.countdownButton:not(:disabled):hover{
     background: var(--blue-dark);
+}
+
+.countdownButton:disabled {
+    background-color: var(--white);
+    color: var(--text);
+    cursor: not-allowed;
+}
+
+.pauseButton {
+    display: flex;
+    width: 25%;
+    height: 5rem;
+    margin-top: 2rem;
+    margin-left: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 5px;
+    background-color: var(--green);
+    color: var(--white);
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.pauseButton:hover {
+    background-color: #127a04;
+}
+
+.resetButton {
+    width: 75%;
+    background-color: var(--yellow);
+    color: var(--white);
+    transition: background-color 0.2s;
+}
+
+.resetButton:hover{
+    background-color: #d3a13e;
 }
