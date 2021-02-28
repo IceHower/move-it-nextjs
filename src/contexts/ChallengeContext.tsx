@@ -4,7 +4,7 @@ import challenges from '../../challenges.json';
 interface Challenge {
     type: 'body' | 'eye',
     description: string,
-    ammount: number,
+    amount: number,
 }
 interface ChallengesContextData {
     level: number,
@@ -15,6 +15,7 @@ interface ChallengesContextData {
     levelUp:() => void,
     startNewChallenge:() => void,
     resetChallenge:() => void,
+    completeChallenge: () => void,
 
 }
 
@@ -50,6 +51,25 @@ export function ChallengesProvider( {children}: ChallengerProviderProps ){
         setActiveChallenges(null);
     }
 
+    function completeChallenge() {
+        if(!activeChallenge) {
+            return;
+        }
+
+       const { amount } = activeChallenge;
+
+       let finalExperience = currentExperience + amount;
+
+       if (finalExperience >= experienceToNextLevel) {
+           finalExperience = finalExperience - experienceToNextLevel;
+        levelUp();
+       }
+
+       setCurrenceExperience(finalExperience);
+       setActiveChallenges(null);
+       setChallengesCompleted(challengesCompleted + 1);
+    }
+
     return (
         <ChallengesContext.Provider 
         value={{level, 
@@ -60,6 +80,7 @@ export function ChallengesProvider( {children}: ChallengerProviderProps ){
                 activeChallenge,
                 resetChallenge,
                 experienceToNextLevel,
+                completeChallenge,
             }}
             >
 
