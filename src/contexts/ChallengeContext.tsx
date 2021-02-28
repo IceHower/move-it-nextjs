@@ -1,5 +1,6 @@
 import { createContext, useState, ReactNode, useEffect } from 'react';
 import challenges from '../../challenges.json';
+import Cookies from 'js-cookie';
 
 interface Challenge {
     type: 'body' | 'eye',
@@ -24,15 +25,18 @@ interface ChallengesContextData {
 //ReactNode vai aceitar qualquer elemento como children (pode ser um texto, tag html, componente react)
 interface ChallengerProviderProps {
     children: ReactNode;
+    level: number;
+    currentExperience: number;
+    challengesCompleted: number;
 }
 // Fala que o valor inicial recebe as tipagens de ChallengesContextData, assim consigo acessar as funções passadas.
 export const ChallengesContext = createContext({} as ChallengesContextData); 
 //Vamos exportar os values qque vão conter no Provider do ChallengesContext em forma de Componente
 //Isso é só para não deixar o app muito poluido com funções e objetos.
-export function ChallengesProvider( {children}: ChallengerProviderProps ){
-    const [level, setLevel] = useState(1);
-    const [currentExperience, setCurrenceExperience] = useState(0);
-    const [challengesCompleted, setChallengesCompleted] = useState(0);
+export function ChallengesProvider( {children, ...rest}: ChallengerProviderProps ){
+    const [level, setLevel] = useState(rest.level ?? 1);
+    const [currentExperience, setCurrenceExperience] = useState(rest.currentExperience ?? 0);
+    const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0);
     const [activeChallenge, setActiveChallenges] = useState(null);
 
     const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
@@ -40,6 +44,12 @@ export function ChallengesProvider( {children}: ChallengerProviderProps ){
     useEffect(() => {
         Notification.requestPermission();
     }, []);
+
+    useEffect(() => {
+        Cookies.set('level', String(level));
+        Cookies.set('challengesCompleted', String(challengesCompleted));
+        Cookies.set('currentExperience', String(currentExperience));
+    }, [level, currentExperience, challengesCompleted]);
 
     function levelUp() {
         setLevel(level + 1);
