@@ -1,0 +1,85 @@
+
+.container {
+    display: flex;
+    height: 100vh;
+    margin: 0 auto;
+    flex-direction: column;
+    background: var(--blue);
+}
+
+.container section {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6.25rem;
+    align-content: center;
+}
+
+.loginContainer {
+    display: flex;
+    max-width: 400px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.loginContainer > img {
+    margin-bottom: 8.5rem;
+}
+.loginContainer strong {
+    font-size: 2.1rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    color: var(--white);
+    margin-bottom: 2.5rem;
+}
+
+.loginContainer > div {
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+}
+
+.loginContainer > div p {
+    color: var(--text-highlight);
+    text-align: left;
+    line-height: 1.5rem;
+    margin: 0 0.75rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.buttonContainer {
+    display: flex;
+    margin-top: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.buttonContainer input {
+    width: 80%;
+    height: 5rem;
+    background:  linear-gradient(90deg, #4953B8 0%, rgba(73, 83, 184, 0.2) 100%);
+    border-radius: 5px;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    padding-left: 0.7rem;
+}
+
+.buttonContainer  input::placeholder {
+    color: var(--text-highlight);
+}
+
+.buttonContainer button {
+    width: 20%;
+    height: 5rem;
+    color: var(--white);
+    border-radius: 5px;
+    background: #4953B8;
+    font-size: 0px;
+    border: 0;
+    margin-left: 0.2rem;
+}

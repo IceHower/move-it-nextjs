@@ -1,19 +1,10 @@
 import styles from '../styles/pages/Login.module.css';
 import { useState } from 'react';
-import { GetServerSideProps } from 'next';
-import Cookies from 'js-cookie';
 
-interface LoginProps {
-  userToken: string;
-}
-export default function login (props: LoginProps) {
+export default function login () {
 
     const [user, setUser] = useState('');
-    const [userToken, setUserToken] = useState('');
 
-    function handleLogin(email) {
-      Cookies.set('userToken', String(email));
-    }
     return (
         <div className={styles.container}>
             <section>
@@ -39,7 +30,7 @@ export default function login (props: LoginProps) {
                         )
                         :
                         (
-                        <button type="submit" onClick={() => handleLogin(user)}>
+                        <button type="submit">
                             <img src="/icons/Vector.svg" alt="Entrar"/>
                         </button>
                         )
@@ -51,19 +42,3 @@ export default function login (props: LoginProps) {
         </div>
     )
 }
-
-// export const getServerSideProps: GetServerSideProps = async({req, res}) => {
-
-//     const  userToken  = req.cookies;
-//     if(userToken) {
-//       return {
-//         redirect: {
-//           destination: '/dashboard',
-//           permanent: false,
-//         }
-//       }
-//     }
-//     return {
-//       props: { userToken }
-//     }
-//   }
